@@ -13,7 +13,7 @@ public class PropUtil {
 
     static {
         try {
-            File file = new File(PROP_PATH);
+            file = new File(PROP_PATH);
             if (!file.exists()) {
                 file.createNewFile();
             }

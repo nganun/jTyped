@@ -1,47 +1,35 @@
 package com.nganun.hotstring;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
+import com.github.kwhat.jnativehook.NativeInputEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
+import org.omg.CORBA.NamedValue;
 
 import java.io.IOException;
+import java.lang.annotation.Native;
+import java.util.Arrays;
 import java.util.Properties;
+import java.util.Set;
 
 public class HotkeyListener implements NativeKeyListener {
 
-    public static String typedString = "";
     public static Properties prop;
+    public static Set<String> propKeySet;
+    public static String typedKeys = "";
+    public static String command = "";
 
     static {
         try {
             prop = PropUtil.getProp();
+            propKeySet = prop.stringPropertyNames();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     public void nativeKeyPressed(NativeKeyEvent e) {
-        System.out.println("Key Pressed: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
+        // System.out.println("KeyText: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
 
-        String typed = NativeKeyEvent.getKeyText(e.getKeyCode());
-        if (typed.equals("Semicolon")) {
-            typedString = ";";
-        } else {
-            typedString += typed;
-        }
-
-        System.out.println(">>>>" + typedString + ":" + prop.getProperty(typedString));
-
-        if (prop.getProperty(typedString.toLowerCase()) != null)  {
-            System.out.println(">>>> 执行命令：" + typedString);
-            int len = typedString.length();
-            String lenStr = typedString;
-            typedString = "";
-
-            RobotUtil.backspace(len);
-
-            RobotUtil.inputKeys(prop.getProperty(lenStr.toLowerCase()));
-
-        }
 
         /**
         if (e.getKeyCode() == NativeKeyEvent.VC_ESCAPE) {
@@ -55,13 +43,29 @@ public class HotkeyListener implements NativeKeyListener {
     }
 
     public void nativeKeyReleased(NativeKeyEvent e) {
-
-        System.out.println("Key Released: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
-
+        // System.out.println("Key Released: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
     }
 
     public void nativeKeyTyped(NativeKeyEvent e) {
-         // System.out.println("Key Typed: " + e.getKeyText(e.getKeyCode()));
+
+        typedKeys += e.getKeyChar();
+        typedKeys = typedKeys.length() > 10 ? typedKeys.substring(5) : typedKeys;
+
+        for (String propKey : propKeySet) {
+            if (typedKeys.indexOf(propKey) > 0) {
+                typedKeys = propKey;
+                command = propKey;
+                break;
+            }
+        }
+
+        if (command.length() > 0) {
+            System.out.println(">>> command：" + command);
+            RobotUtil.backspace(command.length());
+            RobotUtil.inputKeys(prop.getProperty(command));
+            typedKeys = "";
+            command = "";
+        }
     }
 
     public static void main(String[] args) {

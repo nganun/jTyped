@@ -30,7 +30,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.nganun.hotstring.HotkeyListener</mainClass>
+                            <mainClass>com.nganun.hotstring.HotstringListener</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
