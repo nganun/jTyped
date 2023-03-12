@@ -30,7 +30,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.nganun.hotstring.HotstringListener</mainClass>
+                            <mainClass>com.nganun.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

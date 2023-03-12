@@ -9,13 +9,14 @@ maven-assembly-plugin
 - Specified the main class enter in pom.xml
 
 ```xml
+
 <plugin>
     <artifactId>maven-assembly-plugin</artifactId>
     <version>2.2</version>
     <configuration>
         <archive>
             <manifest>
-                <mainClass>com.nganun.hotstring.HotkeyListener</mainClass>
+                <mainClass>com.nganun.hotstring.HotstringListenercom.nganun.hotstring.HotstringListener</mainClass>
             </manifest>
         </archive>
         <descriptorRefs>
