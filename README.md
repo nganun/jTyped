@@ -51,5 +51,13 @@ tasklist | grep javaw
 taskkill /f /im javaw.exe
 ```
 
+## TODO
+
+- Hotstring
+
+- [ ] Execute command by hostring
+- [ ] Restart the main function
+- [ ] Read the properties live time
+
 
 
