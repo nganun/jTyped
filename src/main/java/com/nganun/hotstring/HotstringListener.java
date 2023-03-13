@@ -3,8 +3,6 @@ package com.nganun.hotstring;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
-import javafx.application.HostServices;
-
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;

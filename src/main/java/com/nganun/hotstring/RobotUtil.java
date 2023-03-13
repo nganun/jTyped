@@ -103,13 +103,4 @@ public class RobotUtil {
         }
     }
 
-    public static void write(String content) {
-        Robot robot = null;
-        try {
-            robot = new Robot();
-        } catch (AWTException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }
