@@ -1,8 +1,9 @@
 package com.nganun.hotstring;
-import com.github.kwhat.jnativehook.GlobalScreen;
-import com.github.kwhat.jnativehook.NativeHookException;
+
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
+
+import javafx.application.HostServices;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -58,7 +59,27 @@ public class HotstringListener implements NativeKeyListener {
         if (command.length() > 0) {
             System.out.println(">>> command：" + command);
             RobotUtil.backspace(command.length());
-            RobotUtil.inputKeys(prop.getProperty(command));
+            if (command.equals(";dd")) {
+                RobotUtil.inputKeys(HotstringUtil.getDate());
+            } else if (command.equals(";tt")) {
+                RobotUtil.inputKeys(HotstringUtil.getTime());
+            } else if (command.equals(";day")) {
+                try {
+                    Runtime.getRuntime().exec(prop.getProperty(command));
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            } else if (command.equals(";log")) {
+                try {
+                    Runtime.getRuntime().exec(prop.getProperty(command));
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            } else {
+                RobotUtil.inputKeys(prop.getProperty(command));
+            }
             typedKeys = "";
             command = "";
         }
