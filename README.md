@@ -55,7 +55,7 @@ taskkill /f /im javaw.exe
 
 - Hotstring
 
-- [ ] Execute command by hostring
+- [x] Execute command by hostring
 - [ ] Restart the main function
 - [ ] Read the properties live time
 

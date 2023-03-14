@@ -13,6 +13,7 @@ public class HotstringListener implements NativeKeyListener {
     public static Set<String> propKeySet;
     public static String typedKeys = "";
     public static String command = "";
+    public static String propValue = "";
 
     static {
         try {
@@ -57,27 +58,26 @@ public class HotstringListener implements NativeKeyListener {
         if (command.length() > 0) {
             System.out.println(">>> command：" + command);
             RobotUtil.backspace(command.length());
-            if (command.equals(";dd")) {
-                RobotUtil.inputKeys(HotstringUtil.getDate());
-            } else if (command.equals(";tt")) {
-                RobotUtil.inputKeys(HotstringUtil.getTime());
-            } else if (command.equals(";day")) {
-                try {
-                    Runtime.getRuntime().exec(prop.getProperty(command));
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
+
+
+            propValue = prop.getProperty(command);
+
+            if (propValue.trim().equals("")) {
+                if (command.equals(";dd")) {
+                    RobotUtil.inputKeys(HotstringUtil.getDate());
+                } else if (command.equals(";tt")) {
+                    RobotUtil.inputKeys(HotstringUtil.getTime());
                 }
-            } else if (command.equals(";log")) {
+            } else if (propValue.trim().startsWith("cmd /")) {
                 try {
-                    Runtime.getRuntime().exec(prop.getProperty(command));
+                    Runtime.getRuntime().exec(propValue);
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             } else {
                 RobotUtil.inputKeys(prop.getProperty(command));
             }
+
             typedKeys = "";
             command = "";
         }
