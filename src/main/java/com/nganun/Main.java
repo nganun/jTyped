@@ -2,7 +2,8 @@ package com.nganun;
 
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
-import com.nganun.hotstring.HotstringListener;
+import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
+import com.nganun.hotstring.MainListener;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,6 +17,7 @@ public class Main {
             System.exit(1);
         }
 
-        GlobalScreen.addNativeKeyListener(new HotstringListener());
+        NativeKeyListener mainListener = new MainListener();
+        GlobalScreen.addNativeKeyListener(mainListener);
     }
 }

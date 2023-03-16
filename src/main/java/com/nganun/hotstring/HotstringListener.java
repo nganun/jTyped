@@ -16,6 +16,7 @@ public class HotstringListener implements NativeKeyListener {
     public static String propValue = "";
 
     static {
+        System.out.println(">>> hostring static");
         try {
             prop = PropUtil.getProp();
             propKeySet = prop.stringPropertyNames();
@@ -58,7 +59,6 @@ public class HotstringListener implements NativeKeyListener {
         if (command.length() > 0) {
             System.out.println(">>> command：" + command);
             RobotUtil.backspace(command.length());
-
 
             propValue = prop.getProperty(command);
 
