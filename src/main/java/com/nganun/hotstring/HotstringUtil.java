@@ -4,15 +4,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class HotstringUtil {
+
+    public static Date date;
+
+    static {
+        date = new Date();
+    }
     
     public static String getDate() {
-        Date date = new Date();
-        String sdf = new SimpleDateFormat("yyyyMMdd").format(date);
-        return sdf;
+        return new SimpleDateFormat("yyyyMMdd").format(date);
     }
 
     public static String getTime() {
-        Date date = new Date();
         return new SimpleDateFormat("HHmmss").format(date);
     }
 
