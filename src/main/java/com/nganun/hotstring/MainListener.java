@@ -65,6 +65,12 @@ public class MainListener implements NativeKeyListener {
             restart();
         }
 
+        if (typedKeys.indexOf(";exit") > 0) {
+            RobotUtil.backspace(5);
+            typedKeys = "";
+            exit();
+        }
+
     }
 
     public static void start() {
@@ -78,5 +84,9 @@ public class MainListener implements NativeKeyListener {
     public static void restart() {
         GlobalScreen.addNativeKeyListener(hostringListener);
         GlobalScreen.removeNativeKeyListener(hostringListener);
+    }
+
+    public static void exit() {
+        System.exit(1);
     }
 }

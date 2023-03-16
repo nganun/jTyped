@@ -16,7 +16,7 @@ maven-assembly-plugin
     <configuration>
         <archive>
             <manifest>
-                <mainClass>com.nganun.hotstring.HotstringListenercom.nganun.hotstring.HotstringListener</mainClass>
+                <mainClass>com.nganun.Main</mainClass>
             </manifest>
         </archive>
         <descriptorRefs>
@@ -59,5 +59,38 @@ taskkill /f /im javaw.exe
 - [x] Restart the main function
 - [ ] Read the properties live time
 
+## Functions
+
+### Main process
+  - `;stop` : stop the key listener
+  - `;start` : start the key listener
+  - `;restart` : restart the key listener
+  - `;exit` : close the application
+
+### Hotstinrg process
+
+the blow all need be config in `.properties` file, if this file not exist, this application will create it under `user.home` directory.
+
+- Hotstring
+
+```properties
+;hw=Hello World!
+```
+typed `;hw`, then print `Hello World!`
+
+- Command by System
+
+```properties
+;np=cmd /c notepad
+```
+typed `;np`, then open the notepad
+
+- Command by Java
+
+```properties
+;dd=
+```
+
+typed `;dd`, then print `yyyyMMdd` format string, need implemented in Java
 
 

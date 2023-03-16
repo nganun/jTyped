@@ -5,7 +5,8 @@ import java.util.Properties;
 
 public class PropUtil {
 
-    private static final String PROP_PATH = System.getProperty("user.home") + "/hotkey.properties";
+    private static final String CUSTOM_PATH = System.getProperty("user.home") + "/.dot/.properties";
+    private static final String DEFAULT_PATH = System.getProperty("user.home") + "/.properties";
     private static File file;
     private static Properties prop;
     private static BufferedInputStream bis;
@@ -13,8 +14,9 @@ public class PropUtil {
 
     static {
         try {
-            file = new File(PROP_PATH);
+            file = new File(CUSTOM_PATH);
             if (!file.exists()) {
+                file = new File(DEFAULT_PATH);
                 file.createNewFile();
             }
             prop = new Properties();
