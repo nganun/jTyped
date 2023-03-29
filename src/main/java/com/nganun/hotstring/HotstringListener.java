@@ -16,7 +16,7 @@ public class HotstringListener implements NativeKeyListener {
     public static String propValue = "";
 
     static {
-        System.out.println(">>> hostring static");
+        System.out.println(">>> Hostring process start ...");
         try {
             prop = PropUtil.getProp();
             propKeySet = prop.stringPropertyNames();
@@ -57,16 +57,19 @@ public class HotstringListener implements NativeKeyListener {
         }
 
         if (command.length() > 0) {
-            System.out.println(">>> command：" + command);
+            System.out.print(">>> [key]: " + command);
             RobotUtil.backspace(command.length());
 
-            propValue = prop.getProperty(command);
-
+            propValue = prop.getProperty(command)
+                    .replaceAll("HKCUSoftwareMicrosoftWindowsCurrentVersionInternet Settings",
+                            "HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet Settings");
             if (propValue.trim().equals("")) {
                 if (command.equals(";dd")) {
-                    RobotUtil.inputKeys(HotstringUtil.getDate());
+                    propValue = HotstringUtil.getDate();
+                    RobotUtil.inputKeys(propValue);
                 } else if (command.equals(";tt")) {
-                    RobotUtil.inputKeys(HotstringUtil.getTime());
+                    propValue = HotstringUtil.getTime();
+                    RobotUtil.inputKeys(propValue);
                 }
             } else if (propValue.trim().startsWith("cmd /")) {
                 try {
@@ -75,8 +78,10 @@ public class HotstringListener implements NativeKeyListener {
                     e1.printStackTrace();
                 }
             } else {
-                RobotUtil.inputKeys(prop.getProperty(command));
+                RobotUtil.inputKeys(propValue);
             }
+
+            System.out.println("\t\t[value]: " + propValue);
 
             typedKeys = "";
             command = "";

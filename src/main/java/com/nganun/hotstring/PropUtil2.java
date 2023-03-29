@@ -1,9 +1,12 @@
 package com.nganun.hotstring;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 
-public class PropUtil {
+public class PropUtil2 {
 
     private static final String CUSTOM_PATH = System.getProperty("user.home") + "/.dot/.properties";
     private static final String DEFAULT_PATH = System.getProperty("user.home") + "/.properties";
@@ -22,8 +25,6 @@ public class PropUtil {
             prop = new Properties();
             bis = new BufferedInputStream(new FileInputStream(file));
             prop.load(bis);
-
-
 //            bos = new BufferedOutputStream(new FileOutputStream(file));
         } catch (IOException e) {
             e.printStackTrace();;

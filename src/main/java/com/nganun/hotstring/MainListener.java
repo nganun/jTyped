@@ -20,7 +20,7 @@ public class MainListener implements NativeKeyListener {
     
 
     static {
-        System.out.println(">>> main static");
+        System.out.println(">>> Main process start ...");
         try {
             prop = PropUtil.getProp();
             propKeySet = prop.stringPropertyNames();
@@ -83,6 +83,7 @@ public class MainListener implements NativeKeyListener {
 
     public static void restart() {
         GlobalScreen.addNativeKeyListener(hostringListener);
+        PropUtil.getReloadProp();
         GlobalScreen.removeNativeKeyListener(hostringListener);
     }
 
