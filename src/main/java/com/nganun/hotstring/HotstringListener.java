@@ -2,6 +2,9 @@ package com.nganun.hotstring;
 
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
+import com.nganun.util.HotstringUtil;
+import com.nganun.util.PropUtil;
+import com.nganun.util.RobotUtil;
 
 import java.io.IOException;
 import java.util.Properties;

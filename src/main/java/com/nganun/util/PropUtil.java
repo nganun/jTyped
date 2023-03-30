@@ -1,4 +1,4 @@
-package com.nganun.hotstring;
+package com.nganun.util;
 
 import java.io.*;
 import java.util.Properties;
