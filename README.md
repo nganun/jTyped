@@ -1,5 +1,6 @@
-# jHotstring
-Use Java implants the hotstring of AutoHotKey
+# jTyped
+
+Use Java implants some quick operations through keys typed.
 
 ## Build
 
@@ -55,9 +56,12 @@ taskkill /f /im javaw.exe
 
 - Hotstring
 
-- [x] Execute command by hostring
-- [x] Restart the main function
-- [ ] Read the properties live time
+  - [x] Execute command by hostring
+  - [x] Restart the main function
+  - [ ] Read the properties live time
+
+- Dict
+  - [ ] When typed `;;word` and typed `Enter`, append the word to Excel file.
 
 ## Functions
 
