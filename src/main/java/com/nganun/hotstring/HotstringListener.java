@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 
 public class HotstringListener implements NativeKeyListener {
 
-
-
     public static Properties prop;
     public static Set<String> propKeySet;
     public static String typedKeys = "";
@@ -63,11 +61,25 @@ public class HotstringListener implements NativeKeyListener {
             if (Pattern.matches(".*;;.*;.*", typedKeys)) {
                 if (matcher.find()) {
                     String word = matcher.group(0).split(";")[2];
-                    RobotUtil.backspace(word.length() + 3);
-                    typedKeys = "";
-                    String[] dict = DictUtil.getTranslate(word);
-                    System.out.println(">>> [word]: " + word + "\t\t[dict]: " + Arrays.toString(dict));
-                    ExcelUtil.addWord(dict);
+                    boolean exist = ExcelUtil.isExist(word);
+                    if (!exist) {
+                        RobotUtil.backspace(word.length() + 3);
+                        typedKeys = "";
+                        String[] dict = DictUtil.getTranslate(word);
+                        System.out.println(">>> [word]: " + word + "\t\t[dict]: " + Arrays.toString(dict));
+                        ExcelUtil.addWord(dict);
+                    } else {
+                        typedKeys = "";
+                        RobotUtil.backspace(word.length() + 3);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                DialogUtil test = new DialogUtil();
+                                test.show("Alert", word + " 单词已经存在", 1000);
+                            }
+                        }).start();
+                    }
+
                 }
             }
         } else {

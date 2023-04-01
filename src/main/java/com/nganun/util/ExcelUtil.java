@@ -16,10 +16,10 @@ import java.util.*;
 public class ExcelUtil {
 
     private static String DICT_PATH = System.getProperty("user.home") + "/.dot/en.xlsx";
+    private static File DICT_FILE = new File(DICT_PATH);
 
     public static void addWord(String[] dictValues) {
-        File file = new File(DICT_PATH);
-        if (!file.exists()) {
+        if (!DICT_FILE.exists()) {
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet sheet = workbook.createSheet("jTyped");
             Row row = sheet.createRow(0);
@@ -33,7 +33,7 @@ public class ExcelUtil {
                 else if (obj instanceof Integer) cell.setCellValue((Integer) obj);
             }
 
-            try (FileOutputStream out = new FileOutputStream(file)){
+            try (FileOutputStream out = new FileOutputStream(DICT_FILE)){
                 workbook.write(out);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -41,7 +41,7 @@ public class ExcelUtil {
         }
 
         try {
-            appendRow(dictValues, file);
+            appendRow(dictValues, DICT_FILE);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -51,6 +51,7 @@ public class ExcelUtil {
     public static void appendRow(String[] dict, File file) throws IOException {
         XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
         Sheet sheet = workbook.getSheetAt(0);
+
         int rowNum = sheet.getLastRowNum() + 1;
         Row row = sheet.createRow(rowNum++);
 
@@ -68,6 +69,27 @@ public class ExcelUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean isExist(String word) {
+        XSSFWorkbook workbook = null;
+        try {
+            workbook = new XSSFWorkbook(new FileInputStream(DICT_FILE));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Sheet sheet = workbook.getSheetAt(0);
+
+        int rowCount = sheet.getPhysicalNumberOfRows();
+
+        for (int i = 0; i < rowCount; i++) {
+            String currentWord = String.valueOf(sheet.getRow(i).getCell(0));
+            if (currentWord.toLowerCase().equals(word.toLowerCase())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static void main(String[] args) {

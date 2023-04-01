@@ -91,11 +91,17 @@ public class DialogUtil {
             }
         });
     }
+
     public void show(String titleValue, String contentValue) {
+        this.show(titleValue, contentValue, 5000);
+    }
+    public void show(String titleValue, String contentValue, int showTime) {
         this.titleValue = titleValue;
         this.contentValue = contentValue;
+
         init();
         handle();
+        tipWindow.setShowTime(showTime);
         tipWindow.setAlwaysOnTop(false);
         tipWindow.setUndecorated(true);
         tipWindow.setResizable(false);
@@ -111,6 +117,11 @@ public class DialogUtil {
 class TipWindow extends JDialog {
     private static final long serialVersionUID = 8541659783234673950L;
     private static Dimension dimension;
+    public  int showTime = 5000;
+
+    public void setShowTime(int showTime) {
+        this.showTime = showTime;
+    }
     private int x, y;
     private int width, height;
     private static Insets screenInsets;
@@ -136,7 +147,7 @@ class TipWindow extends JDialog {
         }
         // 此处代码用来实现让消息提示框 3 秒后自动消失
         try {
-            Thread.sleep(3000);
+            Thread.sleep(showTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
