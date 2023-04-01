@@ -5,7 +5,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-        InfoUtil test = new InfoUtil();
+        DialogUtil test = new DialogUtil();
 
         test.show(TITLE, "这是一个弹窗测试！");
     }

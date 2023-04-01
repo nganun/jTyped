@@ -6,7 +6,6 @@ import com.nganun.util.*;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -106,15 +105,13 @@ public class HotstringListener implements NativeKeyListener {
                 }
 
                 System.out.println("\t\t[value]: " + propValue);
-//                test.show("Alert", "\t\t[value]: " + propValue);
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        InfoUtil test = new InfoUtil();
-                        test.show("Alert", propValue);
-                        System.out.println("lksdjflsakflsa");
-                    }
-                }).start();
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        DialogUtil test = new DialogUtil();
+//                        test.show("Alert", propValue);
+//                    }
+//                }).start();
                 typedKeys = "";
                 command = "";
             }
