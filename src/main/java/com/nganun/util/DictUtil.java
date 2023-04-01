@@ -19,7 +19,7 @@ public class DictUtil {
         System.out.println(getTranslate("time").toString());
     }
 
-    public static List<String> getTranslate(String word) {
+    public static String[] getTranslate(String word) {
         List<String> contents = new ArrayList<>();
         word = word.replaceAll(" ", "+");
         String url = "https://www.bing.com/dict/search?q=" + word;
@@ -50,15 +50,13 @@ public class DictUtil {
         //System.out.println(web);
         int i = web.indexOf("该词条暂未被收录");
         if (i == -1) {
+
             Document document = Jsoup.parse(web, "utf-8");
-            String phonetic = document.getElementsByClass("hd_prUS b_primtxt").get(0).text();
-            String tense = document.getElementsByClass("hd_div1").get(0).text();
-            String description = document.getElementsByTag("ul").get(1).text();
-            contents.add(word);
-            contents.add(phonetic);
-            contents.add(tense);
-            contents.add(description);
-            return contents;
+            String phonetic = document.getElementsByClass("hd_prUS b_primtxt").isEmpty() ? "" : document.getElementsByClass("hd_prUS b_primtxt").get(0).text();
+            String tense = document.getElementsByClass("hd_div1").isEmpty() ? "" : document.getElementsByClass("hd_div1").get(0).text();
+            String description = document.getElementsByTag("ul").isEmpty() ? "" : document.getElementsByTag("ul").get(1).text();
+
+            return new String[]{word, phonetic, tense, description};
         } else {
             return null;
         }

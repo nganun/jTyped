@@ -13,7 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 
-public class ExcelUtil {
+public class ExcelUtil2 {
 
     private static Map<Integer, Object[]> prepareData(int rowNum, List<DictEntity> recordsToWrite) {
         Map<Integer, Object[]> data = new HashMap<>();

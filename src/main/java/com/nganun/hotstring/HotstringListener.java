@@ -2,15 +2,19 @@ package com.nganun.hotstring;
 
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
-import com.nganun.util.HotstringUtil;
-import com.nganun.util.PropUtil;
-import com.nganun.util.RobotUtil;
+import com.nganun.util.*;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HotstringListener implements NativeKeyListener {
+
+
 
     public static Properties prop;
     public static Set<String> propKeySet;
@@ -49,46 +53,74 @@ public class HotstringListener implements NativeKeyListener {
     public void nativeKeyTyped(NativeKeyEvent e) {
 
         typedKeys += e.getKeyChar();
-        typedKeys = typedKeys.length() > 10 ? typedKeys.substring(5) : typedKeys;
+        typedKeys = typedKeys.length() > 20 ? typedKeys.substring(5) : typedKeys;
 
-        for (String propKey : propKeySet) {
-            if (typedKeys.indexOf(propKey) > 0) {
-                typedKeys = propKey;
-                command = propKey;
-                break;
+        String regex = ".*;;.*;";
+        boolean isMatch = Pattern.matches(regex, typedKeys);
+
+        if (Pattern.matches(".*;;.*", typedKeys)) {
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(typedKeys);
+            if (Pattern.matches(".*;;.*;.*", typedKeys)) {
+                if (matcher.find()) {
+                    String word = matcher.group(0).split(";")[2];
+                    RobotUtil.backspace(word.length() + 3);
+                    typedKeys = "";
+                    String[] dict = DictUtil.getTranslate(word);
+                    System.out.println(">>> [word]: " + word + "\t\t[dict]: " + Arrays.toString(dict));
+                    ExcelUtil.addWord(dict);
+                }
+            }
+        } else {
+            for (String propKey : propKeySet) {
+                if (typedKeys.indexOf(propKey) > 0) {
+                    typedKeys = propKey;
+                    command = propKey;
+                    break;
+                }
+            }
+
+            if (command.length() > 0) {
+                System.out.print(">>> [key]: " + command);
+                RobotUtil.backspace(command.length());
+
+                propValue = prop.getProperty(command)
+                        .replaceAll("HKCUSoftwareMicrosoftWindowsCurrentVersionInternet Settings",
+                                "HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet Settings");
+                if (propValue.trim().equals("")) {
+                    if (command.equals(";dd")) {
+                        propValue = HotstringUtil.getDate();
+                        RobotUtil.inputKeys(propValue);
+                    } else if (command.equals(";tt")) {
+                        propValue = HotstringUtil.getTime();
+                        RobotUtil.inputKeys(propValue);
+                    }
+                } else if (propValue.trim().startsWith("cmd /")) {
+                    try {
+                        Runtime.getRuntime().exec(propValue);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                } else {
+                    RobotUtil.inputKeys(propValue);
+                }
+
+                System.out.println("\t\t[value]: " + propValue);
+//                test.show("Alert", "\t\t[value]: " + propValue);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        InfoUtil test = new InfoUtil();
+                        test.show("Alert", propValue);
+                        System.out.println("lksdjflsakflsa");
+                    }
+                }).start();
+                typedKeys = "";
+                command = "";
             }
         }
 
-        if (command.length() > 0) {
-            System.out.print(">>> [key]: " + command);
-            RobotUtil.backspace(command.length());
 
-            propValue = prop.getProperty(command)
-                    .replaceAll("HKCUSoftwareMicrosoftWindowsCurrentVersionInternet Settings",
-                            "HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet Settings");
-            if (propValue.trim().equals("")) {
-                if (command.equals(";dd")) {
-                    propValue = HotstringUtil.getDate();
-                    RobotUtil.inputKeys(propValue);
-                } else if (command.equals(";tt")) {
-                    propValue = HotstringUtil.getTime();
-                    RobotUtil.inputKeys(propValue);
-                }
-            } else if (propValue.trim().startsWith("cmd /")) {
-                try {
-                    Runtime.getRuntime().exec(propValue);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            } else {
-                RobotUtil.inputKeys(propValue);
-            }
-
-            System.out.println("\t\t[value]: " + propValue);
-
-            typedKeys = "";
-            command = "";
-        }
     }
 
 }
