@@ -1,4 +1,4 @@
-package com.nganun.util;
+package com.github.nganun.util;
 
 public class Test {
     private final static String TITLE="弹窗";

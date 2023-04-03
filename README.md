@@ -12,20 +12,20 @@ maven-assembly-plugin
 ```xml
 
 <plugin>
-    <artifactId>maven-assembly-plugin</artifactId>
-    <version>2.2</version>
-    <configuration>
-        <archive>
-            <manifest>
-                <mainClass>com.nganun.Main</mainClass>
-            </manifest>
-        </archive>
-        <descriptorRefs>
-            <descriptorRef>
-                jar-with-dependencies
-            </descriptorRef>
-        </descriptorRefs>
-    </configuration>
+  <artifactId>maven-assembly-plugin</artifactId>
+  <version>2.2</version>
+  <configuration>
+    <archive>
+      <manifest>
+        <mainClass>com.github.nganun.Maincom.github.nganun.Main</mainClass>
+      </manifest>
+    </archive>
+    <descriptorRefs>
+      <descriptorRef>
+        jar-with-dependencies
+      </descriptorRef>
+    </descriptorRefs>
+  </configuration>
 </plugin>
 ```
 

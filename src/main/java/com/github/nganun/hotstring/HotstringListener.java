@@ -1,8 +1,8 @@
-package com.nganun.hotstring;
+package com.github.nganun.hotstring;
 
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
-import com.nganun.util.*;
+import com.github.nganun.util.*;
 
 import java.io.IOException;
 import java.util.Arrays;

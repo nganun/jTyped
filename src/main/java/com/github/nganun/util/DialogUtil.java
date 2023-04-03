@@ -1,4 +1,4 @@
-package com.nganun.util;
+package com.github.nganun.util;
 
 import javax.swing.*;
 import java.awt.*;
