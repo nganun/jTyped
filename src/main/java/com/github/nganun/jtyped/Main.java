@@ -4,9 +4,12 @@ import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import com.github.nganun.jtyped.hotstring.MainListener;
+import com.github.nganun.jtyped.util.TaskUtil;
 
 public class Main {
     public static void main(String[] args) {
+
+        // Start hotstring
         try {
             GlobalScreen.registerNativeHook();
         }
@@ -19,5 +22,9 @@ public class Main {
 
         NativeKeyListener mainListener = new MainListener();
         GlobalScreen.addNativeKeyListener(mainListener);
+
+
+        // Start tasks
+        TaskUtil.lightOrDarkThemeTask();
     }
 }
