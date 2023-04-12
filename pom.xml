@@ -61,7 +61,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.github.nganun.Main</mainClass>
+                            <mainClass>com.github.nganun.jtyped.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

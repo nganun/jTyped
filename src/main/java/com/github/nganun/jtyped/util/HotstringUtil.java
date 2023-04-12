@@ -1,4 +1,4 @@
-package com.github.nganun.util;
+package com.github.nganun.jtyped.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

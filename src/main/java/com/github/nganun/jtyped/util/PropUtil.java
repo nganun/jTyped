@@ -1,4 +1,4 @@
-package com.github.nganun.util;
+package com.github.nganun.jtyped.util;
 
 import java.io.*;
 import java.util.Properties;
@@ -27,6 +27,12 @@ public class PropUtil {
 //            bos = new BufferedOutputStream(new FileOutputStream(file));
         } catch (IOException e) {
             e.printStackTrace();;
+        } finally {
+            try {
+                bis.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -38,20 +44,29 @@ public class PropUtil {
         return prop.getProperty(key);
     }
 
-    public static void getReloadProp() {
+    public static Properties getReloadProp() {
         try {
             file = new File(CUSTOM_PATH);
             if (!file.exists()) {
                 file = new File(DEFAULT_PATH);
                 file.createNewFile();
             }
-            prop = new Properties();
+            Properties reloadProp = new Properties();
             bis = new BufferedInputStream(new FileInputStream(file));
             prop.load(bis);
+            return prop;
 //            bos = new BufferedOutputStream(new FileOutputStream(file));
         } catch (IOException e) {
             e.printStackTrace();;
+        } finally {
+            try {
+                bis.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+
+        return prop;
     }
     
 }

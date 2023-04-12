@@ -1,9 +1,9 @@
-package com.github.nganun;
+package com.github.nganun.jtyped;
 
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
-import com.github.nganun.hotstring.MainListener;
+import com.github.nganun.jtyped.hotstring.MainListener;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.github.nganun.excel;
+package com.github.nganun.jtyped.excel;
 
 public class DictEntity {
 

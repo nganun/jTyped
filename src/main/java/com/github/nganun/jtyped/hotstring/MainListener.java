@@ -1,10 +1,10 @@
-package com.github.nganun.hotstring;
+package com.github.nganun.jtyped.hotstring;
 
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
-import com.github.nganun.util.PropUtil;
-import com.github.nganun.util.RobotUtil;
+import com.github.nganun.jtyped.util.PropUtil;
+import com.github.nganun.jtyped.util.RobotUtil;
 
 import java.io.IOException;
 import java.util.Properties;

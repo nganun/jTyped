@@ -1,4 +1,4 @@
-package com.github.nganun.excel;
+package com.github.nganun.jtyped.excel;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;

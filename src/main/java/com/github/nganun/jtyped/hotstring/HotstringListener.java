@@ -1,8 +1,8 @@
-package com.github.nganun.hotstring;
+package com.github.nganun.jtyped.hotstring;
 
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
-import com.github.nganun.util.*;
+import com.github.nganun.jtyped.util.*;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -96,8 +96,10 @@ public class HotstringListener implements NativeKeyListener {
                 RobotUtil.backspace(command.length());
 
                 propValue = prop.getProperty(command)
-                        .replaceAll("HKCUSoftwareMicrosoftWindowsCurrentVersionInternet Settings",
-                                "HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet Settings");
+                        .replaceAll("HKCUSoftwareMicrosoftWindowsCurrentVersion",
+                                "HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\")
+                        .replace("ThemesPersonalize",
+                                "Themes\\Personalize");
                 if (propValue.trim().equals("")) {
                     if (command.equals(";dd")) {
                         propValue = HotstringUtil.getDate();
