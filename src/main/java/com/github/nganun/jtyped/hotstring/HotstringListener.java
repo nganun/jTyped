@@ -22,7 +22,7 @@ public class HotstringListener implements NativeKeyListener {
     static {
         System.out.println(">>> Hostring process start ...");
         try {
-            prop = PropUtil.getProp();
+            prop = PropertiesUtil.getProp();
             propKeySet = prop.stringPropertyNames();
         } catch (IOException e) {
             throw new RuntimeException(e);

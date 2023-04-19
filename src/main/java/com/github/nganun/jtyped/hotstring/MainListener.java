@@ -3,7 +3,7 @@ package com.github.nganun.jtyped.hotstring;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
-import com.github.nganun.jtyped.util.PropUtil;
+import com.github.nganun.jtyped.util.PropertiesUtil;
 import com.github.nganun.jtyped.util.RobotUtil;
 
 import java.io.IOException;
@@ -12,25 +12,23 @@ import java.util.Set;
 
 public class MainListener implements NativeKeyListener {
 
-    public static Properties prop;
-    public static Set<String> propKeySet;
+    public static Properties properties;
+    public static Set<String> propertiesKeySet;
     public static String typedKeys = "";
-    public static String command = "";
-    public static String propValue = "";
-    public static NativeKeyListener hostringListener;
+    public static NativeKeyListener hotstringListener;
     
 
     static {
         System.out.println(">>> Main process start ...");
         try {
-            prop = PropUtil.getProp();
-            propKeySet = prop.stringPropertyNames();
+            properties = PropertiesUtil.getProp();
+            propertiesKeySet = properties.stringPropertyNames();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        hostringListener = new HotstringListener();
-        GlobalScreen.addNativeKeyListener(hostringListener);
+        hotstringListener = new HotstringListener();
+        GlobalScreen.addNativeKeyListener(hotstringListener);
     }
 
     public void nativeKeyPressed(NativeKeyEvent e) {
@@ -75,17 +73,18 @@ public class MainListener implements NativeKeyListener {
     }
 
     public static void start() {
-        GlobalScreen.addNativeKeyListener(hostringListener);
+        GlobalScreen.addNativeKeyListener(hotstringListener);
     }
 
     public static void stop() {
-        GlobalScreen.removeNativeKeyListener(hostringListener);
+        GlobalScreen.removeNativeKeyListener(hotstringListener);
     }
 
+    // Invalid
     public static void restart() {
-        GlobalScreen.addNativeKeyListener(hostringListener);
-        PropUtil.getReloadProp();
-        GlobalScreen.removeNativeKeyListener(hostringListener);
+        GlobalScreen.addNativeKeyListener(hotstringListener);
+        // PropertiesUtil.getReloadProp();
+        GlobalScreen.removeNativeKeyListener(hotstringListener);
     }
 
     public static void exit() {

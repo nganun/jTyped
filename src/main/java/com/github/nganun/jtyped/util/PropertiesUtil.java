@@ -3,7 +3,7 @@ package com.github.nganun.jtyped.util;
 import java.io.*;
 import java.util.Properties;
 
-public class PropUtil {
+public class PropertiesUtil {
 
     private static final String CUSTOM_PATH = System.getProperty("user.home") + "/.dot/.properties";
     private static final String DEFAULT_PATH = System.getProperty("user.home") + "/.properties";
@@ -68,5 +68,5 @@ public class PropUtil {
 
         return prop;
     }
-    
+
 }
